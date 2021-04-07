@@ -25,6 +25,8 @@ const DropdownMenu = (retailers) => {
 
   const retrievedObject = localStorage.getItem("selectedOption");
 
+  console.log(retrievedObject, 'RETRIVED OBJECT')
+
   return (
     <Main>
       <img
@@ -34,18 +36,22 @@ const DropdownMenu = (retailers) => {
       />
       <DropDownContainer>
         <DropDownHeader onClick={toggling}>
+        {
+          retrievedObject ?
           <Logo
             src={
               retrievedObject
                 ? JSON.parse(retrievedObject).logoUrl
-                : selectedOption.logoUrl
+                : selectedOption ?  selectedOption.logoUrl : ''
             }
             alt="logo"
-          
           />
+          :
+          null
+        }
           {retrievedObject
             ? JSON.parse(retrievedObject).name
-            : selectedOption.name || "Select a Reatailer"}
+            : selectedOption ? selectedOption.name : "Select a Reatailer"}
         </DropDownHeader>
         {isOpen && (
           <DropDownListContainer>
